@@ -89,7 +89,7 @@ COPY libm.so.6 ${GCC7_DIR}/lib64
 
 RUN cd ${RAPIDS_DIR} \
   && source activate rapids \
-  && git clone -b branch-0.15 --depth 1 --single-branch https://github.com/rapidsai/cudf.git \
+  && git clone -b docker_issues --depth 1 --single-branch https://github.com/jdye64/cudf.git \
   && cd cudf \
   && git submodule update --init --recursive --no-single-branch --depth 1 \
   && cd ${RAPIDS_DIR} \
@@ -169,10 +169,10 @@ RUN cd ${RAPIDS_DIR}/cuspatial && \
   export CUDF_HOME="$PWD/../cudf" && \
   ./build.sh
 
-RUN cd ${RAPIDS_DIR}/cuml && \
-  source activate rapids && \
-  ccache -s && \
-  ./build.sh --allgpuarch libcuml cuml prims
+# RUN cd ${RAPIDS_DIR}/cuml && \
+#   source activate rapids && \
+#   ccache -s && \
+#   ./build.sh --allgpuarch libcuml cuml prims
 
 RUN cd ${RAPIDS_DIR}/cugraph && \
   source activate rapids && \
